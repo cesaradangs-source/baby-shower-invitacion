@@ -1,69 +1,282 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invitación a la Fiesta de Bebé</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f8ff;
-            color: #333;
-            text-align: center;
-            padding: 20px;
-            animation: sparkle 1.5s infinite;
-        }
-        @keyframes sparkle {
-            0% { background-color: #f0f8ff; }
-            50% { background-color: #e6f7ff; }
-            100% { background-color: #f0f8ff; }
-        }
-        h1 {
-            color: #ff69b4;
-            font-size: 2.5em;
-            margin-bottom: 0.5em;
-            transition: opacity 1.5s ease-in-out;
-        }
-        #music {
-            display: none;
-            opacity: 0;
-            transition: opacity 1.5s ease-in;
-        }
-        #playButton {
-            padding: 10px 20px;
-            background-color: #ff69b4;
-            border: none;
-            color: white;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: 1.2em;
-        }
-    </style>
-</head>
-<body>
-    <h1>¡Estás Invitado a la Fiesta de Bebé!</h1>
-    <p>Ven y celebra con nosotros el nuevo miembro de la familia.</p>
-    <img src="dinos.png" alt="Dinosaurios" style="max-width: 80%; height: auto;">
-    <h2>Itinerario:</h2>
-    <p><img src="itinerario.png" alt="Itinerario" style="max-width: 80%; height: auto;"></p>
-    <p>Por favor, no olvides traer tu mejor sonrisa.</p>
-    <button id="playButton">Escuchar Canción</button>
-    <audio id="music" controls>
-        <source src="cancion.mp3" type="audio/mpeg">
-        Tu navegador no soporta el audio.
-    </audio>
-    <script>
-        const playButton = document.getElementById('playButton');
-        const music = document.getElementById('music');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invitación Baby Shower</title>
 
-        playButton.addEventListener('click', () => {
-            music.style.display = 'block';
-            setTimeout(() => {
-                music.style.opacity = '1';
-                music.play();
-            }, 1000);
-        });
-    </script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+font-family:'Poppins',sans-serif;
+background:#fff7f2;
+color:#444;
+overflow-x:hidden;
+}
+
+.section{
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+padding:30px 15px;
+text-align:center;
+}
+
+.hero{
+background:url("dinos.png") center/contain no-repeat;
+width:100%;
+height:100vh;
+}
+
+.envelope{
+position:fixed;
+inset:0;ackground:linear-gradient(135deg,#fbd3e9,#cce7ff);
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:9999;
+}
+
+.card{
+padding:30px 45px;
+background:white;
+border-radius:20px;
+box-shadow:0 15px 40px rgba(0,0,0,.15);
+font-size:1.3rem;
+cursor:pointer;
+animation:pulse 1.8s infinite;
+text-align:center;
+}
+
+@keyframes pulse{
+0%,100%{transform:scale(1)}
+50%{transform:scale(1.07)}
+}
+
+.intro h2{
+font-family:'Playfair Display';
+font-size:2rem;
+margin-bottom:15px;
+animation:fadeUp 1.3s ease;
+}
+
+@keyframes fadeUp{
+from{opacity:0;transform:translateY(20px)}
+to{opacity:1;transform:translateY(0)}
+}
+
+.countdown-box{
+background:white;
+padding:30px;
+border-radius:25px;
+box-shadow:0 10px 30px rgba(0,0,0,.1);
+max-width:350px;
+animation:float 4s ease-in-out infinite;
+}
+
+@keyframes float{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-10px)}
+}
+
+.countdown{
+font-size:2rem;
+font-weight:600;
+margin-top:10px;
+}
+
+.sparkle{
+position:absolute;
+width:6px;
+height:6px;
+background:white;
+border-radius:50%;
+animation:sparkle 6s linear infinite;
+opacity:.7;
+}
+
+@keyframes sparkle{
+0%{transform:translateY(0);opacity:0}
+50%{opacity:1}
+100%{transform:translateY(-120vh);opacity:0}
+}
+
+.map iframe{
+width:100%;
+max-width:500px;
+height:300px;
+border-radius:18px;
+border:none;
+}
+
+.itinerary img{
+width:100%;
+max-width:500px;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+form{
+background:white;
+padding:25px;
+border-radius:20px;
+box-shadow:0 15px 35px rgba(0,0,0,.12);
+max-width:420px;
+width:100%;
+}
+
+input,textarea{
+width:100%;
+padding:12px;
+margin:8px 0;
+border-radius:12px;
+border:1px solid #ddd;
+font-size:1rem;
+}
+
+button{
+padding:12px;
+border:none;
+border-radius:14px;
+font-size:1rem;
+cursor:pointer;
+margin-top:10px;
+width:100%;
+}
+
+.btn{
+background:#7fb5ff;
+color:white;
+}
+
+.btn.red{
+background:#ff8080;
+}
+
+audio{display:none}
+</style>
+</head>
+
+<body>
+
+<div class="envelope" id="cover" onclick="abrir()">
+<div class="card">
+✨ Felicidades ✨<br>
+Fuiste seleccionado para asistir a:
+</div>
+</div>
+
+<audio id="musica" loop>
+<source src="cancion.mp3">
+</audio>
+
+<section class="section hero"></section>
+
+<section class="section intro">
+<h2>Cuenta regresiva para el gran día 🍼</h2>
+
+<div class="countdown-box">
+<div class="countdown" id="timer"></div>
+</div>
+</section>
+
+<section class="section map">
+<h2>Ubicación</h2><br>
+<iframe src="https://maps.google.com/maps?q=23%20de%20Abril%2058%20San%20Pedro%20Xalpa&t=&z=17&ie=UTF8&iwloc=&output=embed"></iframe>
+</section>
+
+<section class="section itinerary">
+<img src="itinerario.png">
+</section>
+
+<section class="section">
+<h2>Confirmación de asistencia</h2><br>
+
+<form onsubmit="enviar(event)">
+
+<input id="nombre" placeholder="Tu nombre" required>
+
+<input id="personas" type="number" min="1" placeholder="¿Cuántas personas asistirán?" required>
+
+<textarea id="alergias" placeholder="Alergias / Comentarios"></textarea>
+
+<button class="btn">Confirmar asistencia</button>
+
+<button type="button" class="btn red" onclick="noAsistire()">No podré asistir</button>
+
+</form>
+</section>
+
+<script>
+const fecha = new Date("2026-04-25T14:30:00");
+
+setInterval(()=>{
+const ahora = new Date();
+let diff = fecha - ahora;
+if(diff<0) return;
+let d=Math.floor(diff/86400000);
+let h=Math.floor(diff%86400000/3600000);
+let m=Math.floor(diff%3600000/60000);
+let s=Math.floor(diff%60000/1000);
+timer.innerHTML=`${d} días ${h}h ${m}m ${s}s`;
+},1000);
+
+function abrir(){
+cover.style.display="none";
+musica.volume=0;
+musica.play();
+let v=0;
+let fade=setInterval(()=>{
+if(v<1){v+=0.05;musica.volume=v}
+else clearInterval(fade);
+},120);
+}
+
+for(let i=0;i<40;i++){ 
+let s=document.createElement("div");
+s.className="sparkle";
+s.style.left=Math.random()*100+"%";
+s.style.top=Math.random()*100+"%";
+s.style.animationDuration=(4+Math.random()*6)+"s";
+document.body.appendChild(s);
+}
+
+function enviar(e){
+e.preventDefault();
+
+let n=nombre.value;
+let p=personas.value;
+let a=alergias.value;
+
+let msg=`Confirmación Baby Shower\nNombre: ${n}\nPersonas: ${p}\nAlergias: ${a}`;
+
+window.open(`https://api.whatsapp.com/send?phone=5215659859496&text=${encodeURIComponent(msg)}`);
+
+fetch("https://script.google.com/macros/s/AKfycbyNcbx_33z4fMTvcyyHi2ny1CoZB-2C81e8GkY-JIOumyPyp4r3FO4gPno-0dBxPqjR/exec",{
+method:"POST",
+body:JSON.stringify({nombre:n,personas:p,alergias:a,asistencia:"SI"})
+});
+
+alert("¡Gracias por confirmar!");
+}
+
+function noAsistire(){
+let msg="No podré asistir al Baby Shower 😢";
+
+window.open(`https://api.whatsapp.com/send?phone=5215659859496&text=${encodeURIComponent(msg)}`);
+
+fetch("https://script.google.com/macros/s/AKfycbyNcbx_33z4fMTvcyyHi2ny1CoZB-2C81e8GkY-JIOumyPyp4r3FO4gPno-0dBxPqjR/exec",{
+method:"POST",
+body:JSON.stringify({nombre:"",personas:0,alergias:"",asistencia:"NO"})
+});
+
+alert("Gracias por avisar ❤️");
+}
+</script>
+
 </body>
 </html>
