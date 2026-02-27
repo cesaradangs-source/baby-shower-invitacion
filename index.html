@@ -26,12 +26,41 @@ padding:30px 15px;
 text-align:center;
 }
 
+/* HERO */
 .hero{
-background:url("https://cesaradangs-source.github.io/baby-shower-invitacion/din.png") center/cover no-repeat;
 width:100%;
-height:100vh;
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+background:#fff7f2;
 }
 
+.hero-text{
+font-family:'Playfair Display';
+font-size:2.3rem;
+margin-bottom:20px;
+animation:fadeUp 1.4s ease;
+}
+
+.hero img{
+width:90%;
+max-width:420px;
+animation:zoomIn 1.8s ease;
+}
+
+@keyframes zoomIn{
+from{transform:scale(.7);opacity:0}
+to{transform:scale(1);opacity:1}
+}
+
+@keyframes fadeUp{
+from{opacity:0;transform:translateY(25px)}
+to{opacity:1;transform:translateY(0)}
+}
+
+/* SOBRE */
 .envelope{
 position:fixed;
 inset:0;
@@ -40,17 +69,29 @@ display:flex;
 align-items:center;
 justify-content:center;
 z-index:9999;
+overflow:hidden;
 }
 
-.card{
-padding:30px 45px;
+.envelope-box{
 background:white;
-border-radius:20px;
-box-shadow:0 15px 40px rgba(0,0,0,.15);
-font-size:1.3rem;
+padding:40px 50px;
+border-radius:25px;
+box-shadow:0 20px 45px rgba(0,0,0,.2);
 cursor:pointer;
-animation:pulse 1.8s infinite;
-text-align:center;
+animation:pulse 2s infinite;
+position:relative;
+}
+
+.envelope-box::before{
+content:"✉️";
+font-size:60px;
+display:block;
+margin-bottom:10px;
+}
+
+.tap-text{
+font-size:1.2rem;
+font-weight:600;
 }
 
 @keyframes pulse{
@@ -58,18 +99,7 @@ text-align:center;
 50%{transform:scale(1.07)}
 }
 
-.intro h2{
-font-family:'Playfair Display';
-font-size:2rem;
-margin-bottom:15px;
-animation:fadeUp 1.3s ease;
-}
-
-@keyframes fadeUp{
-from{opacity:0;transform:translateY(20px)}
-to{opacity:1;transform:translateY(0)}
-}
-
+/* CRONOMETRO */
 .countdown-box{
 background:white;
 padding:30px;
@@ -81,23 +111,23 @@ animation:float 4s ease-in-out infinite;
 
 @keyframes float{
 0%,100%{transform:translateY(0)}
-50%{transform:translateY(-10px)}
+50%{transform:translateY(-12px)}
 }
 
 .countdown{
 font-size:2rem;
 font-weight:600;
-margin-top:10px;
 }
 
+/* SPARKLES */
 .sparkle{
 position:absolute;
 width:6px;
 height:6px;
 background:white;
 border-radius:50%;
-animation:sparkle 6s linear infinite;
-opacity:.7;
+animation:sparkle 7s linear infinite;
+opacity:.8;
 }
 
 @keyframes sparkle{
@@ -106,6 +136,7 @@ opacity:.7;
 100%{transform:translateY(-120vh);opacity:0}
 }
 
+/* MAPA */
 .map iframe{
 width:100%;
 max-width:500px;
@@ -114,6 +145,7 @@ border-radius:18px;
 border:none;
 }
 
+/* ITINERARIO */
 .itinerary img{
 width:100%;
 max-width:500px;
@@ -121,6 +153,7 @@ border-radius:20px;
 box-shadow:0 10px 25px rgba(0,0,0,.15);
 }
 
+/* FORM */
 form{
 background:white;
 padding:25px;
@@ -149,66 +182,78 @@ margin-top:10px;
 width:100%;
 }
 
-.btn{
-background:#7fb5ff;
-color:white;
-}
-
-.btn.red{
-background:#ff8080;
-}
+.btn{background:#7fb5ff;color:white}
+.btn.red{background:#ff8080}
 
 audio{display:none}
+
+/* CONFETI */
+.confetti{
+position:fixed;
+width:10px;
+height:10px;
+background:red;
+top:-20px;
+animation:confetti 4s linear forwards;
+}
+
+@keyframes confetti{
+to{transform:translateY(110vh) rotate(720deg);opacity:0}
+}
 </style>
 </head>
 
 <body>
 
+<!-- SOBRE -->
 <div class="envelope" id="cover" onclick="abrir()">
-<div class="card">
-✨ Felicidades ✨<br>
-Fuiste seleccionado para asistir a:
-</div>
+  <div class="envelope-box">
+    <div class="tap-text">✨ Toque aquí ✨</div>
+  </div>
 </div>
 
 <audio id="musica" loop>
 <source src="https://cesaradangs-source.github.io/baby-shower-invitacion/cancion.mp3">
 </audio>
 
-<section class="section hero"></section>
+<!-- HERO -->
+<section class="section hero">
+  <div class="hero-text">
+    ✨ Felicidades ✨<br>
+    Fuiste seleccionado para asistir a:
+  </div>
+  <img src="https://cesaradangs-source.github.io/baby-shower-invitacion/din.png">
+</section>
 
-<section class="section intro">
-<h2>Cuenta regresiva para el gran día 🍼</h2>
-
+<!-- CRONOMETRO -->
+<section class="section">
+<h2>Cuenta regresiva para el gran día 🍼</h2><br>
 <div class="countdown-box">
 <div class="countdown" id="timer"></div>
 </div>
 </section>
 
+<!-- MAPA -->
 <section class="section map">
 <h2>Ubicación</h2><br>
 <iframe src="https://maps.google.com/maps?q=23%20de%20Abril%2058%20San%20Pedro%20Xalpa&t=&z=17&ie=UTF8&iwloc=&output=embed"></iframe>
 </section>
 
+<!-- ITINERARIO -->
 <section class="section itinerary">
 <img src="https://cesaradangs-source.github.io/baby-shower-invitacion/itinerario.png">
 </section>
 
+<!-- CONFIRMACION -->
 <section class="section">
 <h2>Confirmación de asistencia</h2><br>
 
 <form onsubmit="enviar(event)">
-
-<input id="nombre" placeholder="Tu nombre" required>
-
+<input id="nombre" placeholder="Nombre completo" required>
 <input id="personas" type="number" min="1" placeholder="¿Cuántas personas asistirán?" required>
-
 <textarea id="alergias" placeholder="Alergias / Comentarios"></textarea>
-
 <button class="btn">Confirmar asistencia</button>
-
 <button type="button" class="btn red" onclick="noAsistire()">No podré asistir</button>
-
 </form>
 </section>
 
@@ -218,7 +263,6 @@ const fecha = new Date("2026-04-25T14:30:00");
 setInterval(()=>{
 const ahora = new Date();
 let diff = fecha - ahora;
-if(diff<0) return;
 let d=Math.floor(diff/86400000);
 let h=Math.floor(diff%86400000/3600000);
 let m=Math.floor(diff%3600000/60000);
@@ -237,7 +281,7 @@ else clearInterval(fade);
 },120);
 }
 
-for(let i=0;i<40;i++){
+for(let i=0;i<50;i++){
 let s=document.createElement("div");
 s.className="sparkle";
 s.style.left=Math.random()*100+"%";
@@ -246,8 +290,21 @@ s.style.animationDuration=(4+Math.random()*6)+"s";
 document.body.appendChild(s);
 }
 
+function lanzarConfeti(){
+for(let i=0;i<120;i++){
+let c=document.createElement("div");
+c.className="confetti";
+c.style.left=Math.random()*100+"%";
+c.style.background=`hsl(${Math.random()*360},100%,60%)`;
+c.style.animationDuration=(2+Math.random()*3)+"s";
+document.body.appendChild(c);
+setTimeout(()=>c.remove(),4000);
+}
+}
+
 function enviar(e){
 e.preventDefault();
+lanzarConfeti();
 
 let n=nombre.value;
 let p=personas.value;
@@ -266,6 +323,8 @@ alert("¡Gracias por confirmar!");
 }
 
 function noAsistire(){
+lanzarConfeti();
+
 let msg="No podré asistir al Baby Shower 😢";
 
 window.open(`https://api.whatsapp.com/send?phone=5215659859496&text=${encodeURIComponent(msg)}`);
@@ -277,6 +336,10 @@ body:JSON.stringify({nombre:"",personas:0,alergias:"",asistencia:"NO"})
 
 alert("Gracias por avisar ❤️");
 }
+</script>
+
+</body>
+</html>
 </script>
 
 </body>
