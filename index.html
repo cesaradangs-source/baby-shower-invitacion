@@ -81,7 +81,6 @@ font-weight:600;
 
 .open-text span{
 font-size:28px;
-font-weight:600;
 }
 
 /* HERO */
@@ -233,19 +232,17 @@ transform:translateY(100vh) rotate(720deg);
 }
 }
 
-/* HOJAS TROPICALES */
+/* HOJAS */
 
 .leaf{
 position:fixed;
 top:-20px;
-width:30px;
-height:30px;
-background-image:url("https://i.imgur.com/9XnK7Qk.png");
-background-size:contain;
-background-repeat:no-repeat;
+width:18px;
+height:18px;
+background:url("https://i.imgur.com/6X4KQ2D.png");
+background-size:cover;
 animation:leafFall linear infinite;
 pointer-events:none;
-opacity:.9;
 }
 
 @keyframes leafFall{
@@ -288,6 +285,8 @@ para abrir la invitación
 <source src="cancion.mp3">
 </audio>
 
+<!-- HERO -->
+
 <section class="section hero">
 
 <div class="title">
@@ -301,6 +300,8 @@ Fuiste seleccionado para asistir a:
 <img src="din.png">
 
 </section>
+
+<!-- FRASE -->
 
 <section class="section">
 
@@ -318,6 +319,8 @@ en esta etapa tan especial.
 </div>
 
 </section>
+
+<!-- CONTADOR -->
 
 <section class="section">
 
@@ -349,6 +352,8 @@ en esta etapa tan especial.
 
 </section>
 
+<!-- UBICACION -->
+
 <section class="section map">
 
 <h2 style="color:white">Ubicación</h2>
@@ -362,11 +367,15 @@ en esta etapa tan especial.
 
 </section>
 
+<!-- ITINERARIO -->
+
 <section class="section itinerary">
 
 <img src="itinerario.png">
 
 </section>
+
+<!-- FORM -->
 
 <section class="section">
 
@@ -391,6 +400,8 @@ en esta etapa tan especial.
 <script>
 
 const URL_SHEET="https://script.google.com/macros/s/AKfycbyNcbx_33z4fMTvcyyHi2ny1CoZB-2C81e8GkY-JIOumyPyp4r3FO4gPno-0dBxPqjR/exec"
+
+const TELEFONO="5215659859496"
 
 /* ABRIR SOBRE */
 
@@ -478,7 +489,12 @@ asistencia:"SI"
 })
 })
 
-alert("¡Gracias por confirmar tu asistencia!")
+let mensaje=`Confirmo asistencia al Baby Shower 🦖
+Nombre: ${nombre}
+Personas: ${personas}
+Alergias: ${alergias}`
+
+window.open(`https://api.whatsapp.com/send?phone=${TELEFONO}&text=${encodeURIComponent(mensaje)}`)
 
 }
 
@@ -500,7 +516,12 @@ asistencia:"NO"
 })
 })
 
-alert("Gracias por avisarnos ❤️")
+let mensaje=`No podré asistir al Baby Shower 😢
+Nombre: ${nombre}
+Personas consideradas: ${personas}
+Comentarios: ${alergias}`
+
+window.open(`https://api.whatsapp.com/send?phone=${TELEFONO}&text=${encodeURIComponent(mensaje)}`)
 
 }
 
