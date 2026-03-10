@@ -79,17 +79,7 @@ font-size:20px;
 font-weight:600;
 }
 
-.open-text span{
-font-size:28px;
-}
-
-/* HERO */
-
-.hero img{
-width:95%;
-max-width:520px;
-margin-top:10px;
-}
+/* TITULOS */
 
 .title{
 font-family:Great Vibes;
@@ -105,7 +95,14 @@ color:white;
 margin-bottom:20px;
 }
 
-/* TARJETA FRASE */
+/* HERO */
+
+.hero img{
+width:95%;
+max-width:520px;
+}
+
+/* TARJETA */
 
 .card{
 background:white;
@@ -116,6 +113,16 @@ margin:25px auto;
 box-shadow:0 10px 25px rgba(0,0,0,.25);
 font-size:17px;
 line-height:1.6;
+}
+
+/* VIDEO */
+
+video{
+width:95%;
+max-width:520px;
+border-radius:20px;
+margin-top:15px;
+box-shadow:0 15px 35px rgba(0,0,0,.4);
 }
 
 /* CONTADOR */
@@ -163,9 +170,6 @@ margin-top:10px;
 color:white;
 margin-top:10px;
 font-size:16px;
-max-width:500px;
-margin-left:auto;
-margin-right:auto;
 }
 
 /* ITINERARIO */
@@ -236,13 +240,15 @@ transform:translateY(100vh) rotate(720deg);
 
 .leaf{
 position:fixed;
-top:-20px;
-width:18px;
-height:18px;
-background:url("https://i.imgur.com/6X4KQ2D.png");
-background-size:cover;
+top:-40px;
+width:28px;
+height:28px;
+background:url("Hoja que cae.jpg");
+background-size:contain;
+background-repeat:no-repeat;
 animation:leafFall linear infinite;
 pointer-events:none;
+opacity:.9;
 }
 
 @keyframes leafFall{
@@ -273,8 +279,7 @@ audio{display:none}
 <div class="flap"></div>
 
 <div class="open-text">
-<span>✨ Toque aquí ✨</span><br>
-para abrir la invitación
+✨ Toque aquí para abrir la invitación ✨
 </div>
 
 </div>
@@ -317,6 +322,22 @@ el amor, el apoyo y la compañía
 en esta etapa tan especial.
 
 </div>
+
+</section>
+
+<!-- VIDEO REVELACION -->
+
+<section class="section">
+
+<h2 style="color:white;font-family:Great Vibes;font-size:34px;">
+Haz clic aquí para la revelación
+</h2>
+
+<video controls>
+
+<source src="FELICIDADES.mp4" type="video/mp4">
+
+</video>
 
 </section>
 
@@ -385,9 +406,9 @@ en esta etapa tan especial.
 
 <input id="nombre" placeholder="Nombre completo" required>
 
-<input id="personas" type="number" placeholder="¿Cuántas personas asistirán?" required>
+<input id="personas" type="number" placeholder="¿Cuántas personas asistirán incluyendote?" required>
 
-<textarea id="alergias" placeholder="Alergias o comentarios"></textarea>
+<textarea id="alergias" placeholder="Comentarios"></textarea>
 
 <button class="btn">Confirmar asistencia</button>
 
@@ -400,7 +421,6 @@ en esta etapa tan especial.
 <script>
 
 const URL_SHEET="https://script.google.com/macros/s/AKfycbyNcbx_33z4fMTvcyyHi2ny1CoZB-2C81e8GkY-JIOumyPyp4r3FO4gPno-0dBxPqjR/exec"
-
 const TELEFONO="5215659859496"
 
 /* ABRIR SOBRE */
@@ -414,7 +434,6 @@ overlay.style.display="none"
 },900)
 
 let m=document.getElementById("musica")
-
 m.volume=0
 m.play()
 
@@ -433,7 +452,6 @@ const fecha=new Date("2026-04-25T14:30:00")
 setInterval(()=>{
 
 let ahora=new Date()
-
 let diff=fecha-ahora
 
 dias.innerHTML=Math.floor(diff/86400000)
@@ -450,13 +468,10 @@ function confetti(){
 for(let i=0;i<70;i++){
 
 let c=document.createElement("div")
-
 c.className="confetti"
 
 c.style.left=Math.random()*100+"%"
-
 c.style.background=`hsl(${Math.random()*360},70%,60%)`
-
 c.style.animationDuration=(2+Math.random()*3)+"s"
 
 document.body.appendChild(c)
@@ -473,28 +488,28 @@ function confirmar(e){
 
 e.preventDefault()
 
-let nombre=document.getElementById("nombre").value
-let personas=document.getElementById("personas").value
-let alergias=document.getElementById("alergias").value
+let nombre=nombreInput.value
+let personas=personas.value
+let alergias=alergias.value
 
 confetti()
 
 fetch(URL_SHEET,{
 method:"POST",
 body:JSON.stringify({
-nombre:nombre,
-personas:personas,
-alergias:alergias,
+nombre,
+personas,
+alergias,
 asistencia:"SI"
 })
 })
 
-let mensaje=`Confirmo asistencia al Baby Shower 🦖
+let mensaje=`Hola! Confirmo mi asistencia al Baby Shower 🦖
 Nombre: ${nombre}
 Personas: ${personas}
 Alergias: ${alergias}`
 
-window.open(`https://api.whatsapp.com/send?phone=${TELEFONO}&text=${encodeURIComponent(mensaje)}`)
+window.location.href=`https://api.whatsapp.com/send?phone=${TELEFONO}&text=${encodeURIComponent(mensaje)}`
 
 }
 
@@ -502,39 +517,38 @@ window.open(`https://api.whatsapp.com/send?phone=${TELEFONO}&text=${encodeURICom
 
 function noAsisto(){
 
-let nombre=document.getElementById("nombre").value
-let personas=document.getElementById("personas").value
-let alergias=document.getElementById("alergias").value
+let nombre=nombreInput.value
+let personas=personas.value
+let alergias=alergias.value
 
 fetch(URL_SHEET,{
 method:"POST",
 body:JSON.stringify({
-nombre:nombre,
-personas:personas,
-alergias:alergias,
+nombre,
+personas,
+alergias,
 asistencia:"NO"
 })
 })
 
-let mensaje=`No podré asistir al Baby Shower 😢
+let mensaje=`Hola! No podré asistir al Baby Shower 😔
 Nombre: ${nombre}
 Personas consideradas: ${personas}
 Comentarios: ${alergias}`
 
-window.open(`https://api.whatsapp.com/send?phone=${TELEFONO}&text=${encodeURIComponent(mensaje)}`)
+window.location.href=`https://api.whatsapp.com/send?phone=${TELEFONO}&text=${encodeURIComponent(mensaje)}`
 
 }
 
 /* HOJAS */
 
-for(let i=0;i<20;i++){
+for(let i=0;i<25;i++){
 
 let hoja=document.createElement("div")
 
 hoja.className="leaf"
 
 hoja.style.left=Math.random()*100+"%"
-
 hoja.style.animationDuration=(6+Math.random()*6)+"s"
 
 document.body.appendChild(hoja)
